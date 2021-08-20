@@ -1,0 +1,230 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: Float!
+  username: String!
+  firstname: String!
+  lastname: String!
+  banquename: String!
+  numtel: String!
+  role: String!
+  email: String!
+  password: String!
+}
+
+type LoginType {
+  token: String!
+  user: User!
+}
+
+type Topic {
+  id: Float!
+  short_name: String!
+  name: String!
+  level: Float!
+}
+
+type SubTopic {
+  id: Float!
+  short_name: String!
+  name: String!
+  level: Float!
+  topic: Topic!
+}
+
+type QuestionGeneration {
+  id: Float!
+  name: String!
+  points: Float!
+  level: Float!
+  weight: Float!
+  sub_topic: SubTopic
+  topic: Topic!
+}
+
+type Type {
+  id: Float!
+  type: String!
+}
+
+type field {
+  id: Float!
+  position: Float!
+  default_value: String
+  field_clone_id: Float
+  field_different_id: Float
+  min_value: Float
+  max_value: Float
+  variation_step: Float
+  type: Type!
+  question_generation: QuestionGeneration!
+}
+
+type FieldValues {
+  id: Float!
+  wording: String!
+  value: String!
+  type: Type!
+  language: Language!
+}
+
+type Quiz {
+  id: Float!
+  title: String!
+  minimum_level: Float!
+  maximum_level: Float!
+  language: Language!
+}
+
+type Language {
+  id: Float!
+  name: String!
+  short_name: String!
+}
+
+type ObjectResponse {
+  message: String!
+}
+
+type QuizQuestion {
+  quiz: Quiz!
+  question_generation: QuestionGeneration!
+  number_of_questions: Float!
+}
+
+type Query {
+  login(input: loginInput!): LoginType!
+  GetLanguages: [Language!]!
+  GetAllQuizzes: [Quiz!]!
+  GetQuizByID(quiz_id: Float!): Quiz!
+  GetAllQuestionGeneration: [QuestionGeneration!]!
+  GetQuestionGenerationByID(question_generation_id: Float!): QuestionGeneration!
+  GetQuestionGenerationByTopicAndLevel(max_level: Float!, min_level: Float!, sub_topic_id: Float!): [QuestionGeneration!]!
+  GetAllTopics: [Topic!]!
+  GetAllSubTopics: [SubTopic!]!
+  GetSubTopicById(topic_id: Float!): [SubTopic!]!
+  GetAllFields: [field!]!
+  GetAllFieldsByGeneratorID(question_generation_id: Float!): [field!]!
+  GetFieldByID(field_id: Float!): field!
+  GetAllFieldValues: [FieldValues!]!
+  GetFieldValuesByType(type_id: Float!): [FieldValues!]!
+  GetAllTypes: [Type!]!
+  GetAllQuizQuestions: [QuizQuestion!]!
+  GetQuizQuestionsByQuizID(quiz_id: Float!): [QuizQuestion!]!
+}
+
+input loginInput {
+  email: String!
+  password: String!
+}
+
+type Mutation {
+  register(register: RegisterInput!): User!
+  CreateNewLanguage(language: NewLanguage!): Language!
+  DeleteLanguage(language_id: Float!): ObjectResponse!
+  CreateQuiz(newQuiz: CreateQuizInput!): Quiz!
+  DeleteQuiz(quiz_id: Float!): ObjectResponse!
+  CreateNewQuestionGeneration(questionGeneration: NewQuestionGeneration!): QuestionGeneration!
+  DeleteQuestionGeneration(question_generation_id: Float!): ObjectResponse!
+  CreateNewTopic(Topic: NewTopic!): Topic!
+  DeleteTopic(topic_id: Float!): ObjectResponse!
+  CreateNewSubTopic(SubTopic: NewSubTopic!): SubTopic!
+  DeleteSubTopic(sub_topic_id: Float!): ObjectResponse!
+  CreateNewField(field: NewField!): field!
+  DeleteField(field_id: Float!): ObjectResponse!
+  UpdateField(updatedField: UpdateField!): field!
+  CreateNewFieldValue(FieldValue: NewFieldValue!): FieldValues!
+  DeleteFieldValue(field_value_id: Float!): ObjectResponse!
+  CreateNewType(Type: NewType!): Type!
+  DeleteType(Type_id: Float!): ObjectResponse!
+  CreateNewQuizQuestion(QuizQuestion: NewQuizQuestion!): QuizQuestion!
+}
+
+input RegisterInput {
+  username: String!
+  firstname: String!
+  lastname: String!
+  banquename: String!
+  numtel: String!
+  role: String!
+  email: String!
+  password: String!
+}
+
+input NewLanguage {
+  name: String!
+  short_name: String!
+}
+
+input CreateQuizInput {
+  title: String!
+  minimum_level: Float!
+  maximum_level: Float!
+  languageid: Float!
+}
+
+input NewQuestionGeneration {
+  points: Float!
+  name: String!
+  level: Float!
+  weight: Float!
+  sub_topic_id: Float
+  topic_id: Float!
+}
+
+input NewTopic {
+  short_name: String!
+  name: String!
+  level: Float!
+}
+
+input NewSubTopic {
+  name: String!
+  short_name: String!
+  level: Float!
+  topic_id: Float!
+}
+
+input NewField {
+  position: Float!
+  default_value: String
+  field_clone_id: Float
+  field_different_id: Float
+  min_value: Float
+  max_value: Float
+  variation_step: Float
+  type_id: Float!
+  question_generation_id: Float!
+}
+
+input UpdateField {
+  id: Float!
+  position: Float
+  default_value: String
+  field_clone_id: Float
+  field_different_id: Float
+  min_value: Float
+  max_value: Float
+  variation_step: Float
+  type_id: Float
+  question_generation_id: Float
+}
+
+input NewFieldValue {
+  wording: String!
+  value: String!
+  type_id: Float!
+  language_id: Float!
+}
+
+input NewType {
+  type: String!
+}
+
+input NewQuizQuestion {
+  quiz_id: Float!
+  question_generation_id: Float!
+  number_of_questions: Float!
+}
