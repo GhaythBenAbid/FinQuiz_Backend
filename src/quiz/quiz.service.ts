@@ -20,6 +20,7 @@ export class QuizService {
             maximum_level : quiz.maximum_level,
             minimum_level : quiz.minimum_level,
             language : language,
+            questions_total : quiz.questions_total,
         })        
     }
 

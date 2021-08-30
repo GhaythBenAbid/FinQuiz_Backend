@@ -15,6 +15,7 @@ import { FieldModule } from './field/field.module';
 import { FieldvaluesModule } from './fieldvalues/fieldvalues.module';
 import { TypeModule } from './type/type.module';
 import { QuizquestionModule } from './quizquestion/quizquestion.module';
+import { ExamModule } from './exam/exam.module';
 
 
 @Module({
@@ -45,6 +46,7 @@ import { QuizquestionModule } from './quizquestion/quizquestion.module';
     FieldvaluesModule,
     TypeModule,
     QuizquestionModule,
+    ExamModule,
   ],
   controllers: [AppController],
   providers: [AppService],

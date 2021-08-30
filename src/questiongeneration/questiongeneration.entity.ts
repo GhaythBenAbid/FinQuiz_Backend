@@ -28,6 +28,16 @@ export class QuestionGeneration{
     @Field()
     @Column()
     weight:Number;
+
+    @Field()
+    @Column()
+    function : Number;
+
+
+    @Field()
+    @Column({type : "float"})
+    difference_variation : Number;
+
     
     @Field(type => SubTopic , {nullable : true})
     @ManyToOne(()=>SubTopic , subTopic => subTopic.id , {onDelete:"CASCADE" , nullable : true} )

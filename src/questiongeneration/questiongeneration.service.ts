@@ -45,6 +45,8 @@ export class QuestiongenerationService {
                 points: questiongeneration.points,
                 level: questiongeneration.level,
                 weight: questiongeneration.weight,
+                function : questiongeneration.function,
+                difference_variation : questiongeneration.difference_variation,
                 sub_topic: sub_topic,
                 topic: topic,
             });
@@ -57,11 +59,6 @@ export class QuestiongenerationService {
 
     async GetQuestionGeneratorByTopicAndLevel(sub_topic_id, min_level, max_level) {
 
-        // const topic = await this.topicRepository.findOne({ id: topic_id });
-
-
-        // const questionGeneration = await this.questionGenerationRepository.find({ relations: ["topic", "sub_topic"], where: { topic: topic } });
-
         return await this.questionGenerationRepository.createQueryBuilder("questionGeneration")
         .leftJoinAndSelect("questionGeneration.topic" , "topic")
         .leftJoinAndSelect("questionGeneration.sub_topic" , "sub_topic")
@@ -71,8 +68,6 @@ export class QuestiongenerationService {
 
 
     }
-
-
 
 
 
@@ -88,9 +83,5 @@ export class QuestiongenerationService {
         }
 
     }
-
-
-
-
 
 }

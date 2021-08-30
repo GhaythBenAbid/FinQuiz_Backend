@@ -24,6 +24,7 @@ type Topic {
   short_name: String!
   name: String!
   level: Float!
+  subtopic: SubTopic
 }
 
 type SubTopic {
@@ -40,6 +41,8 @@ type QuestionGeneration {
   points: Float!
   level: Float!
   weight: Float!
+  function: Float!
+  difference_variation: Float!
   sub_topic: SubTopic
   topic: Topic!
 }
@@ -70,12 +73,31 @@ type FieldValues {
   language: Language!
 }
 
+type Exam {
+  id: Float!
+  certification: String!
+  class: String!
+  exam_duration: Float!
+  success_percentage: Float!
+  exam_date: String!
+  quiz: Quiz!
+}
+
+type QuizQuestion {
+  quiz: Quiz!
+  question_generation: QuestionGeneration!
+  number_of_questions: Float!
+}
+
 type Quiz {
   id: Float!
   title: String!
   minimum_level: Float!
   maximum_level: Float!
+  questions_total: Float!
   language: Language!
+  quiz_question: [QuizQuestion!]!
+  exam: Exam!
 }
 
 type Language {
@@ -86,12 +108,6 @@ type Language {
 
 type ObjectResponse {
   message: String!
-}
-
-type QuizQuestion {
-  quiz: Quiz!
-  question_generation: QuestionGeneration!
-  number_of_questions: Float!
 }
 
 type Query {
@@ -113,6 +129,8 @@ type Query {
   GetAllTypes: [Type!]!
   GetAllQuizQuestions: [QuizQuestion!]!
   GetQuizQuestionsByQuizID(quiz_id: Float!): [QuizQuestion!]!
+  GetAllExams: [Exam!]!
+  GetExamById(exam_id: Float!): Exam!
 }
 
 input loginInput {
@@ -140,6 +158,8 @@ type Mutation {
   CreateNewType(Type: NewType!): Type!
   DeleteType(Type_id: Float!): ObjectResponse!
   CreateNewQuizQuestion(QuizQuestion: NewQuizQuestion!): QuizQuestion!
+  CreateNewExam(exam: CreateNewExam!): Exam!
+  DeleteExam(exam_id: Float!): ObjectResponse!
 }
 
 input RegisterInput {
@@ -163,6 +183,7 @@ input CreateQuizInput {
   minimum_level: Float!
   maximum_level: Float!
   languageid: Float!
+  questions_total: Float!
 }
 
 input NewQuestionGeneration {
@@ -172,6 +193,8 @@ input NewQuestionGeneration {
   weight: Float!
   sub_topic_id: Float
   topic_id: Float!
+  function: Float!
+  difference_variation: Float!
 }
 
 input NewTopic {
@@ -227,4 +250,13 @@ input NewQuizQuestion {
   quiz_id: Float!
   question_generation_id: Float!
   number_of_questions: Float!
+}
+
+input CreateNewExam {
+  certification: String!
+  class: String!
+  exam_date: String!
+  exam_duration: Float!
+  success_percentage: Float!
+  quiz_id: Float!
 }

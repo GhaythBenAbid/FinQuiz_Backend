@@ -13,4 +13,7 @@ export class CreateQuizInput{
 
     @Field()
     languageid : Number;
+
+    @Field()
+    questions_total : Number;
 }

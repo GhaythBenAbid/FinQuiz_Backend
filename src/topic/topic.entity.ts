@@ -21,6 +21,8 @@ export class Topic{
     @Column()
     level : Number;
 
+
+    @Field(type => SubTopic ,  {nullable : true})
     @OneToMany(()=>SubTopic , subtopic => subtopic.topic)
     subtopic : SubTopic[];
 

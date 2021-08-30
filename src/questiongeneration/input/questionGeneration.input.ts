@@ -19,4 +19,10 @@ export class NewQuestionGeneration{
 
     @Field()
     topic_id : Number;
+
+    @Field()
+    function : Number;
+
+    @Field()
+    difference_variation : Number;
 }
